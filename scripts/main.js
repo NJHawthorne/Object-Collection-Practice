@@ -54,6 +54,24 @@ console.log(britishPrices[0].title+' costs £'+britishPrices[0].price);
 //   }
 // }
 // items.forEach(gotWood);
+//Get a list of the names of products that have a tag of 'wood'
+//Input: Items array (type = array of objects)
+
+//1. Pick out the items that have wood as one of their tags
+var gotWood = items.filter(function(currentValue) {
+  if(currentValue.materials.indexOf('wood') !== -1) {
+    return true;
+  } else {
+    return false;
+  }
+});
+//2. Convert the items from step 1 to just a list of items
+
+//3. Return or display the list
+
+
+//Output: The items that have a tag of wood (type - array of product names, strings)
+console.log(gotWood);
 
 function manyMaterials (itemList) {
   if(itemList.materials.length >= 8) {
