@@ -15,14 +15,14 @@ function accumulatePrices(storeList) {
 //Calling a forEach loop to run through the array of objects
 items.forEach(accumulatePrices);
 //Printing out the average with two decimal places
-console.log("The average price of all the items is "+(averageItemPrice/countItem).toFixed(2)+".");
+console.log("The average price of all the items is $"+(averageItemPrice/countItem).toFixed(2)+".");
 
-console.log("Items that cost between $14.00 USD and $18.00 USD:");
-
+console.log("Items that cost between $14.00 USD and $18.00 USD:\n\n");
+//Starting a filter to sort which items have both USD currency and a certain price range
 var sortedPriceListing = items.filter(function(currentValue) {
   //Checking if the currency listed is in USD
   if(currentValue.currency_code === 'USD'){
-    //Checking if the price is within the pre-determined range
+    //Checking if the price is within the pre-determined range. Had to convert strings to numbers.
     if (parseFloat(currentValue.price) > 14 && parseFloat(currentValue.price) < 18) {
       return true;
     } 
@@ -30,8 +30,10 @@ var sortedPriceListing = items.filter(function(currentValue) {
     return false;
   }  
 });
-//Printing out the entire object. Analyze at will.
-console.log(sortedPriceListing);
+//Starting a map so I can get the title property of the objects in the array. That was a mouthful.
+sortedPriceListing.map(function(currentValue) {
+  console.log(currentValue.title+'\n\n');
+});
 
 //Making a smaller array for only GBP currency. The British are that damn special.
 var britishPrices = items.filter(function(currentValue) {
@@ -42,50 +44,45 @@ var britishPrices = items.filter(function(currentValue) {
     return false;
   }
 });
-//Yeah, this is kind of cheating, but there's only one object with GBP currency. If there were more, there would be a neater solution, but hey, I know ahead of time, so I made my own rules.
+//Yeah, this is kind of cheating, but there's only one object with GBP currency. If there were more, I would have used .map(), but hey, I know ahead of time, so I made my own rules.
 console.log(britishPrices[0].title+' costs £'+britishPrices[0].price);
 
-//....I'm fighting the urge to make a got wood joke, since this is supposed to be looking up wooden materials. 
-// function gotWood (itemList) {
-//   for (var i = 0; i < itemList.materials.length; i++) {
-//     if(itemList[i].materials === 'wood'){
-//       console.log(storeList.title);
-//     }
-//   }
-// }
-// items.forEach(gotWood);
-//Get a list of the names of products that have a tag of 'wood'
-//Input: Items array (type = array of objects)
 
-//1. Pick out the items that have wood as one of their tags
+//starting a filter to check for wooden items in the main array
 var gotWood = items.filter(function(currentValue) {
+  //If the value exists in the materials section of the array, return true so it can be filtered
   if(currentValue.materials.indexOf('wood') !== -1) {
     return true;
+  //everything else can go away. booooo.
   } else {
     return false;
   }
 });
-//2. Convert the items from step 1 to just a list of items
-
-//3. Return or display the list
-
-
-//Output: The items that have a tag of wood (type - array of product names, strings)
-console.log(gotWood);
-
+console.log("\nMaterials that contain wood:\n\n")
+//Starting another map just so I can pull the titles out of this array. Whoop whoop
+gotWood.map(function(currentValue) {
+  console.log(currentValue.title+'\n');
+});
+console.log('\nItems made out of eight or more materials:\n\n');
+//Making a function specifically to console.log the title and materials of the material-intensive items.
 function manyMaterials (itemList) {
+  //checking if the length of the materials array is greater than/equal to 8
   if(itemList.materials.length >= 8) {
     console.log(itemList.title+'\n\n'+itemList.materials+'\n\n');
   }
 }
+//running the forEach() method to get my console logs
 items.forEach(manyMaterials);
 
+//Keeping a counter for how many people made their own stuff
 var creatorCount = 0;
-
+//Starting a function to see who made their own items
 function whoMadeIt (storeList) {
   if(storeList.who_made === 'i_did') {
+    //for every person who made their own stuff, this counter grows by 1
     creatorCount++;
   }
 }
+//Running the forEach() method to get my creator count up
 items.forEach(whoMadeIt);
 console.log(creatorCount+' were made by their sellers');
