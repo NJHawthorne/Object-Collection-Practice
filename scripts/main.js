@@ -46,4 +46,21 @@ var britishPrices = items.filter(function(currentValue) {
 console.log(britishPrices[0].title+' costs £'+britishPrices[0].price);
 
 //....I'm fighting the urge to make a got wood joke, since this is supposed to be looking up wooden materials. 
-function gotWood
+// function gotWood (itemList) {
+//   for (var i = 0; i < itemList.materials.length; i++) {
+//     if(itemList[i].materials === 'wood'){
+//       console.log(storeList.title);
+//     }
+//   }
+// }
+// items.forEach(gotWood);
+
+var creatorCount = 0;
+
+function whoMadeIt (storeList) {
+  if(storeList.who_made === 'i_did') {
+    creatorCount++;
+  }
+}
+items.forEach(whoMadeIt);
+console.log(creatorCount+' were made by their sellers');
