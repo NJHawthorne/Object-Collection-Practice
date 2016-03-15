@@ -55,6 +55,13 @@ console.log(britishPrices[0].title+' costs £'+britishPrices[0].price);
 // }
 // items.forEach(gotWood);
 
+function manyMaterials (itemList) {
+  if(itemList.materials.length >= 8) {
+    console.log(itemList.title+'\n\n'+itemList.materials+'\n\n');
+  }
+}
+items.forEach(manyMaterials);
+
 var creatorCount = 0;
 
 function whoMadeIt (storeList) {
